@@ -14,6 +14,7 @@
     "jest": "NODE_ENV=TEST jest --testPathIgnorePatterns \"(__fixtures__|matcher.js)\"",
     "jest:ci": "NODE_ENV=TEST jest --no-cache --testPathIgnorePatterns \"(__fixtures__|matcher.js)\" --ci --runInBand",
     "prettier": "node ./scripts/prettier/index.js write-changed",
+    "prettier:stat": "node ./scripts/prettier/index.js",
     "prettier:all": "node ./scripts/prettier/index.js write"
   },
   "repository": {
