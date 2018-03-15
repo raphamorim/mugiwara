@@ -22,11 +22,7 @@ const style = createStyle({
   backgroundColor: 'green'
 })
 
-const Box = (props) => {
-  return (
-    <div {...props} styles={style} />
-  )
-}
+const Box = (props) => <div {...props} style={style} />
 
 export default Box
 ```
