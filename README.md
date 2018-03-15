@@ -1,6 +1,7 @@
-# Mugiwara 麦わら帽子
+<h2 dir='rtl' align='right'>Mugiwara</h2>
+<p dir='rtl' align='right'>麦わら帽子</p>
 
-> blazing fast minimal css-in-js solution
+> Mugiwara is a blazing fast minimal CSS-in-JS
 
 ## Installing
 
