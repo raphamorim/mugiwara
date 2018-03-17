@@ -1,9 +1,12 @@
 <h2 dir='rtl' align='right'>Mugiwara</h2>
 <p dir='rtl' align='right'>麦わら帽子</p>
 
-> Mugiwara is an another fast minimal CSS-in-JS created to Reduce Size of injected CSS
+> Mugiwara is an another fast minimal CSS-in-JS created to reduce size of CSS injected
 
-Mugiwara is a work in progress.
+Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as `Chained CSS`.
+
+## How `Chained CSS` works?
+
 
 ## Installing
 
@@ -50,4 +53,4 @@ const doc = `
 ## TODO
 
 - [ ] Support MediaQueries
-- [ ] 
+- [ ] Server Side Renderer
