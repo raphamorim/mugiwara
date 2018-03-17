@@ -83,7 +83,8 @@ const doc = `
 ## TODO
 
 - [ ] Support MediaQueries
-- [ ] Server Side Renderer
+- [ ] Support Server Side Renderer
+- [ ] Support React Native Style (using [native-css](https://github.com/raphamorim/native-css))
 
 ## Reference
 

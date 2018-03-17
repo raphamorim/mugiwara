@@ -1,3 +1,5 @@
+function processQueue()
+
 function createClass(styleObject) {
 
 
