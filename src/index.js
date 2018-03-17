@@ -94,7 +94,7 @@ function createClassFN(styleOrClassName, style) {
     })
   })
 
-  return className
+  return className.replace('.', '')
 }
 
 function generate() {
@@ -111,4 +111,3 @@ export function clearStyles() {
   rules = []
   transformedRules = {}
 }
-

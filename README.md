@@ -15,11 +15,15 @@ Good to read: [Efficiently Rendering CSS](https://css-tricks.com/efficiently-ren
 
 - Prehemption
 
-Soon more details
+Feature not available yet, soon more details.
 
 - Remove redundances
 
+Good to read: [Remove Unused CSS to Reduce the Size of your Stylesheets](https://www.labnol.org/internet/remove-unused-css/28635/)
+
 #### How Chain CSS works?
+
+Algorithm still in development, here's a preview of first step:
 
 ```jsx
 
@@ -88,14 +92,14 @@ Example with ReactJS Server side-render:
 ```jsx
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { shallowStyles, clearStyles } from 'cxs'
+import { shallowStyles, clearStyles } from 'mugiwara'
 import App from './App'
 
 const html = ReactDOMServer.renderToString(<App />)
 
 const doc = `
   <html>
-    <style>${styles}</style>
+    <style>${shallowStyles()}</style>
     ${html}
   </html>
 `
