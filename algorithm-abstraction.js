@@ -20,6 +20,39 @@ var input3 = {
 
 const rules = [];
 const transformedRules = {};
+const cache = {};
+
+function hyphenateStyleName(string) {
+  const uppercasePattern = /[A-Z]/g;
+  const msPattern = /^ms-/;
+
+  return string in cache
+  ? cache[string]
+  : cache[string] = string
+    .replace(uppercasePattern, '-$&')
+    .toLowerCase()
+    .replace(msPattern, '-ms-');
+}
+
+function createMarkup(obj) {
+  var keys = Object.keys(obj)
+  if (!keys.length) return ''
+  var i, len = keys.length
+  var result = ''
+
+  for (i = 0; i < len; i++) {
+    var key = keys[i]
+    var val = obj[key]
+    if (typeof val === 'object') {
+      val = `{${createMarkup(val)}}`
+      result += hyphenateStyleName(key) + val
+    } else {
+      result += hyphenateStyleName(key) + ':' + val + ';'
+    }
+  }
+
+  return result
+}
 
 function mountCSS(styles, className) {
   if (transformedRules[className]) {
@@ -64,22 +97,11 @@ function createClass(style) {
   return className;
 }
 
-// should create
-/*
-{
-  '.mw-xxx': { la: 1, be: 2, io: 3 },
-  '.mw-yyy': { la: 2, be: 2 },
-  '.mw-www': { ac: 1, io: 3 } }
-*/
-
 createClass(input1)
 createClass(input2)
 createClass(input3)
 
 transform(rules)
 
-console.log(transformedRules)
-
+console.log(createMarkup(transformedRules))
 console.timeEnd('ended with')
-
-// console.log(rules)
