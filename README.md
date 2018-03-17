@@ -3,17 +3,19 @@
 
 > Mugiwara is an another fast minimal CSS-in-JS created to reduce size of CSS injected
 
-Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as `Chain CSS`.
+Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as [Chain CSS](#how-chain-css-works).
 
 #### Premises:
 
-- Transform in everything to Shallow definition
+- Transform in everything to Shallow CSS definition
 
-Browsers read selectors from right to left. The deeper the selectors are, the longer it takes for the browser to render and re-render the elements those selectors are applied to. For complex DOMs that reflow often, short selectors can also cut down on jank
+Browsers read selectors from right to left. The deeper the selectors are, the longer it takes for the browser to render and re-render the elements those selectors are applied to. For complex DOMs that reflow often, short selectors can also cut down on jank. 
 
-- remove redundances  
+Good to read: [Efficiently Rendering CSS](https://css-tricks.com/efficiently-rendering-css/)
 
-#### How `Chain CSS` works?
+- Remove redundances
+
+#### How Chain CSS works?
 
 
 ## Installing
@@ -66,3 +68,4 @@ const doc = `
 ## Reference
 
 - https://www.creativebloq.com/how-to/5-tips-for-super-fast-css
+- https://ryantsao.com/blog/virtual-css-with-styletron
