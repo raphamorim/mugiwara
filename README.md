@@ -5,7 +5,7 @@
 
 Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as [Chain CSS](#how-chain-css-works).
 
-#### Premises:
+#### Principles:
 
 - Transform in everything to Shallow CSS definition
 
@@ -17,6 +17,26 @@ Good to read: [Efficiently Rendering CSS](https://css-tricks.com/efficiently-ren
 
 #### How Chain CSS works?
 
+```jsx
+
+Element A -> {color: 'blue', padding: '10px', fontFamily: 'Helvetica'}
+Element B -> {color: 'red', borderRight: '1px solid #333'}
+Element C -> {padding: 10, fontFamily: 'Helvetica'}
+
+Result:
+
+.A { 
+  color: blue 
+}
+.A, .C { 
+  padding: '10px', 
+  fontFamily: 'Helvetica' 
+}
+.B { 
+  border-right: '1px solid #333' 
+}
+
+````
 
 ## Installing
 
