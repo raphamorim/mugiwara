@@ -56,7 +56,8 @@ Example with ReactJS:
 
 ```jsx
 import React from 'react'
-import { createClass } from 'mugiwara'
+import { render } from 'react-dom'
+import { createClass, shallowStyles } from 'mugiwara'
 
 const className = createClass({
   padding: 32,
@@ -65,7 +66,9 @@ const className = createClass({
 
 const Box = (props) => <div {...props} className={className} />
 
-export default Box
+shallowStyles()
+
+render(Box, document.querySelector('#root'))
 ```
 
 Also valid API: 
