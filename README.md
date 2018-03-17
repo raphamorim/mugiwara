@@ -69,7 +69,7 @@ shallowStyles()
 render(Box, document.querySelector('#root'))
 ```
 
-Also valid API: 
+Also valid API (still in draft):
 
 ```jsx
 const className = createClass(`
@@ -109,7 +109,7 @@ console.log(doc)
 */
 ```
 
-## ROADMAP
+## 1.x ROADMAP
 
 - [ ] Support pseudo-selectors
 - [ ] Support to prefix

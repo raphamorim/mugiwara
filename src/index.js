@@ -3,21 +3,20 @@ import injectStyle from './injectStyle'
 
 let rules = []
 let transformedRules = {}
-const cache = {}
+
+const hyphenate = memoize(hyphenateStyleName)
+const markup = memoize(createMarkup)
+const transform = memoize(transformRules)
 
 function hyphenateStyleName(string) {
   const uppercasePattern = /[A-Z]/g;
   const msPattern = /^ms-/;
 
-  return string in cache
-  ? cache[string]
-  : cache[string] = string
+  return string
     .replace(uppercasePattern, '-$&')
     .toLowerCase()
     .replace(msPattern, '-ms-')
 }
-
-const hyphenate = memoize(hyphenateStyleName)
 
 function createMarkup(obj) {
   const keys = Object.keys(obj)
@@ -29,17 +28,15 @@ function createMarkup(obj) {
     const key = keys[i]
     let val = obj[key]
     if (typeof val === 'object') {
-      val = `{${createMarkup(val)}}`
-      result += hyphenate(key) + val
+      val = `{${markup(val)}}`
+      result += key + val
     } else {
-      result += hyphenate(key) + ':' + val + ';'
+      result += key + ':' + val + ';'
     }
   }
 
   return result
 }
-
-const markup = memoize(createMarkup)
 
 function mountCSS(styles, className) {
   if (transformedRules[className]) {
@@ -51,7 +48,7 @@ function mountCSS(styles, className) {
   }
 }
 
-function transform(rules) {
+function transformRules(rules) {
   if (rules.length && rules[0]) {
     let matches = []
     let classNames = []
@@ -71,12 +68,28 @@ function transform(rules) {
   }
 }
 
-function createClassFN(style) {
-  const className = '.mw-' + Math.random().toString(36).substring(7);
-  Object.keys(style).forEach((property) => {
+function createClassFN(styleOrClassName, style) {
+  let className
+  let styleRules
+
+  if (typeof styleOrClassName === 'object') {
+    className = '.mw-' + Math.random().toString(36).substring(7)
+    styleRules = Object.keys(styleOrClassName)
+  } else if (
+    typeof styleOrClassName === 'string' &&
+    typeof style === 'object'
+  ) {
+    className = '.' + styleOrClassName
+    styleRules = Object.keys(style)
+    styleOrClassName = style
+  } else {
+    return false
+  }
+
+  styleRules.forEach((property) => {
     rules.push({
-      property: property,
-      value: style[property],
+      property: hyphenate(property),
+      value: styleOrClassName[property],
       className: className,
     })
   })
@@ -92,7 +105,7 @@ function generate() {
   return generatedCSS
 }
 
-export const createClass = memoize(createClassFN)
+export const createClass = createClassFN
 export const shallowStyles = generate
 export function clearStyles() {
   rules = []
