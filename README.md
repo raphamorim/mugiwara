@@ -3,8 +3,6 @@
 
 > Mugiwara is a fast minimal CSS-in-JS created to reduce size of CSS injected
 
-[WORK IN PROGRESS, NOTHING TO SEE HERE YET]
-
 Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as [Chain CSS](#how-chain-css-works).
 
 #### Principles:
@@ -90,7 +88,7 @@ Example with ReactJS Server side-render:
 ```jsx
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { styles } from 'cxs'
+import { shallowStyles, clearStyles } from 'cxs'
 import App from './App'
 
 const html = ReactDOMServer.renderToString(<App />)
@@ -101,14 +99,23 @@ const doc = `
     ${html}
   </html>
 `
+
+// clear cached styles
+clearStyles()
+
+console.log(doc)
+/*
+
+*/
 ```
 
 ## ROADMAP
 
 - [ ] Support pseudo-selectors
+- [ ] Support to prefix
 - [ ] Check similar properties (e.g: `#FFF`, `white`) and keep one
 - [ ] Support MediaQueries
-- [ ] Support Server Side Renderer
+- [x] Support Server Side Renderer
 - [ ] Cache features
 - [ ] Support React Native Style (using [native-css](https://github.com/raphamorim/native-css))
 

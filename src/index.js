@@ -1,4 +1,5 @@
 import memoize from 'fast-memoize'
+import injectStyle from './injectStyle'
 
 let rules = []
 let transformedRules = {}
@@ -85,11 +86,14 @@ function createClassFN(style) {
 
 function generate() {
   transform(rules)
-  return markup(transformedRules)
+  const generatedCSS = markup(transformedRules)
+
+  injectStyle(generatedCSS)
+  return generatedCSS
 }
 
 export const createClass = memoize(createClassFN)
-export const shallowStyles = memoize(generate)
+export const shallowStyles = generate
 export function clearStyles() {
   rules = []
   transformedRules = {}
