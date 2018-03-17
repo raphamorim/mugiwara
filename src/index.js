@@ -1,3 +1,4 @@
-export function abc() {
-  console.log(1);
-}
+import memoize from 'fast-memoize'
+import createClassFN from './createClass'
+
+export const createClass = memoize(createClassFN)

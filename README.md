@@ -1,12 +1,14 @@
 <h2 dir='rtl' align='right'>Mugiwara</h2>
 <p dir='rtl' align='right'>麦わら帽子</p>
 
-> Mugiwara is a blazing fast minimal CSS-in-JS
+> Mugiwara is an another fast minimal CSS-in-JS created to Reduce Size of injected CSS
+
+Mugiwara is a work in progress.
 
 ## Installing
 
 ```bash
-yarn install mugiwara
+yarn add mugiwara
 ```
 
 ## Using it
@@ -15,14 +17,14 @@ Example with ReactJS:
 
 ```jsx
 import React from 'react'
-import { createStyle } from 'mugiwara'
+import { createClass } from 'mugiwara'
 
-const style = createStyle({
-  padding: '32px',
+const className = createClass({
+  padding: 32,
   backgroundColor: 'green'
 })
 
-const Box = (props) => <div {...props} style={style} />
+const Box = (props) => <div {...props} className={className} />
 
 export default Box
 ```
@@ -44,3 +46,8 @@ const doc = `
   </html>
 `
 ```
+
+## TODO
+
+- [ ] Support MediaQueries
+- [ ] 
