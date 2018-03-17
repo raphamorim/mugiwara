@@ -1,17 +1,23 @@
 <h2 dir='rtl' align='right'>Mugiwara</h2>
 <p dir='rtl' align='right'>麦わら帽子</p>
 
-> Mugiwara is an another fast minimal CSS-in-JS created to reduce size of CSS injected
+> Mugiwara is a fast minimal CSS-in-JS created to reduce size of CSS injected
+
+[WORK IN PROGRESS, NOTHING TO SEE HERE YET]
 
 Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as [Chain CSS](#how-chain-css-works).
 
 #### Principles:
 
-- Transform in everything to Shallow CSS definition
+- Transform declarations in Shallow way
 
 Browsers read selectors from right to left. The deeper the selectors are, the longer it takes for the browser to render and re-render the elements those selectors are applied to. For complex DOMs that reflow often, short selectors can also cut down on jank. 
 
 Good to read: [Efficiently Rendering CSS](https://css-tricks.com/efficiently-rendering-css/)
+
+- Prehemption
+
+Soon more details
 
 - Remove redundances
 
@@ -62,6 +68,20 @@ const Box = (props) => <div {...props} className={className} />
 export default Box
 ```
 
+Also valid API: 
+
+```jsx
+const className = createClass(`
+  position: 'abolute',
+  padding: 32px,
+  backgroundColor: 'green'
+
+  & div {
+    width: 100px;
+  }
+`)
+```
+
 Example with ReactJS Server side-render:
 
 ```jsx
@@ -80,10 +100,13 @@ const doc = `
 `
 ```
 
-## TODO
+## ROADMAP
 
+- [ ] Support pseudo-selectors
+- [ ] Check similar properties (e.g: `#FFF`, `white`) and keep one
 - [ ] Support MediaQueries
 - [ ] Support Server Side Renderer
+- [ ] Cache features
 - [ ] Support React Native Style (using [native-css](https://github.com/raphamorim/native-css))
 
 ## Reference

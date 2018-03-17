@@ -1,46 +1,52 @@
 console.time('ended with')
 
 var input1 = {
-  color: 1,
-  background: 4,
-  fontSize: 3
+  color: '#333',
+  background: '#F9F9F9',
+  fontSize: 20
 }
 
 var input2 = {
-  color: 1,
-  background: 2
+  color: '#f8f8f8',
+  background: 'blue',
+  borderRigth: '1px solid #333'
 }
 
 var input3 = {
-  color: 2,
-  fontSize: 5
+  color: '#333',
+  fontSize: '15px',
+  position: 'absolute'
 }
 
 const rules = [];
 const transformedRules = {};
 
 function mountCSS(styles, className) {
-  let obj = {}
-  obj[styles[0].property] = styles[0].value
-  transformedRules[className] = obj
+  if (transformedRules[className]) {
+    transformedRules[className][styles[0].property] = styles[0].value
+  } else {
+    let obj = {}
+    obj[styles[0].property] = styles[0].value
+    transformedRules[className] = obj
+  }
 }
 
 function transform(rules) {
   if (rules.length && rules[0]) {
     let matches = []
-    let classNames = ''
+    let classNames = []
 
     const newRules = rules.filter((filteredRule) => {
       if (filteredRule.value === rules[0].value &&
       filteredRule.property === rules[0].property) {
         matches.push(filteredRule)
-        classNames += filteredRule.className + ' '
+        classNames.push(filteredRule.className)
       } else {
         return filteredRule
       }
     })
 
-    mountCSS(matches, classNames.trim())
+    mountCSS(matches, classNames.join(','))
     return transform(newRules)
   }
 }
@@ -48,7 +54,11 @@ function transform(rules) {
 function createClass(style) {
   const className = '.mw-' + Math.random().toString(36).substring(7);
   Object.keys(style).forEach((property) => {
-    rules.push({property: property, value: style[property], className: className})
+    rules.push({
+      property: property,
+      value: style[property],
+      className: className,
+    })
   });
 
   return className;
