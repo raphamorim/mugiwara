@@ -1,4 +1,4 @@
-import {createClass, shallowStyles, clearStyles} from '../index.js';
+import {createClass, createStyles, clearStyles} from '../index.js';
 
 describe('injectStyle', () => {
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('injectStyle', () => {
       display: 'flex',
     });
 
-    shallowStyles();
+    createStyles();
 
     const myElement = document.createElement('div');
     myElement.classList.add('my-stylesheet');

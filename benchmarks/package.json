@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "test": "node index.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-register": "^6.24.1",
+    "babel-standalone": "^6.25.0",
+    "benchmark": "^2.1.4",
+    "browser-env": "^3.1.0",
+    "cxs": "^6.2.0",
+    "emotion": "^6.0.3",
+    "glamor": "^2.20.40",
+    "glamorous": "^3.24.0",
+    "jsdom-global": "^3.0.2",
+    "microtime": "^2.1.6",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-emotion": "^9.0.2",
+    "react-fela": "^5.2.0",
+    "styled-components": "^2.1.1"
+  }
+}

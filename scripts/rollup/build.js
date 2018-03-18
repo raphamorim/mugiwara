@@ -32,6 +32,7 @@ function createBundle({entryPath, bundleType, destName}) {
     babel({
       exclude: 'node_modules/**',
       externalHelpers: false,
+      babelrc: false
     }),
     commonjs(),
     resolve({

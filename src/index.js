@@ -112,6 +112,14 @@ function generate() {
   return generatedCSS;
 }
 
+function createStylesFN() {
+  transform(rules);
+  const generatedCSS = markup(transformedRules);
+
+  injectStyle(markup(generatedCSS));
+}
+
+export const createStyles = createStylesFN;
 export const createClass = createClassFN;
 export const shallowStyles = generate;
 export function clearStyles() {
