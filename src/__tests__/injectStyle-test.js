@@ -1,13 +1,16 @@
-import {createClass, shallowStyles, createStyles, clearStyles} from '../index.js';
+import {createClass, createStyles, clearStyles} from '../index.js';
 
 function getComputedStyle(element, prop) {
-   if (element.currentStyle) {
-        return element.currentStyle[prop];
-    } else if (window.getComputedStyle && window.getComputedStyle(element, null)) {
-        return window.getComputedStyle(element, null).getPropertyValue(prop);
-    } else {
-        return element.style[prop];
-    }
+  if (element.currentStyle) {
+    return element.currentStyle[prop];
+  } else if (
+    window.getComputedStyle &&
+    window.getComputedStyle(element, null)
+  ) {
+    return window.getComputedStyle(element, null).getPropertyValue(prop);
+  } else {
+    return element.style[prop];
+  }
 }
 
 describe('injectStyle', () => {

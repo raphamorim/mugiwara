@@ -1,35 +1,12 @@
 import memoize from 'fast-memoize';
 import injectStyle from './injectStyle';
 import hyphenate from './hyphenateStyleName';
+import createMarkup from './createMarkup';
 
 let rules = [];
 let transformedRules = {};
-let hasStyleChanged = true;
 
-const markup = memoize(createMarkup);
 const transform = memoize(transformRules);
-
-function createMarkup(obj) {
-  const keys = Object.keys(obj);
-  if (!keys.length)
-    return '';
-
-  let i, len = keys.length;
-  let result = '';
-
-  for (i = 0; i < len; i++) {
-    const key = keys[i];
-    let val = obj[key];
-    if (typeof val === 'object') {
-      val = `{${markup(val)}}`;
-      result += key + val;
-    } else {
-      result += key + ':' + val + ';';
-    }
-  }
-
-  return result;
-}
 
 function mountCSS(styles, className) {
   if (transformedRules[className]) {
@@ -42,7 +19,7 @@ function mountCSS(styles, className) {
 }
 
 function transformRules(_rules) {
-  if (_rules.length && _rules[0]) {
+  if (_rules && _rules.length && _rules[0]) {
     let matches = [];
     let classNames = [];
 
@@ -60,6 +37,8 @@ function transformRules(_rules) {
 
     mountCSS(matches, classNames.join(','));
     return transform(newRules);
+  } else {
+    return null;
   }
 }
 
@@ -115,17 +94,28 @@ function createClassFN(styleOrClassName, style) {
 
 function generate() {
   transform(rules);
-  const generatedCSS = markup(transformedRules);
+  const generatedCSS = createMarkup(transformedRules);
+  injectStyle(generatedCSS);
   return generatedCSS;
 }
 
-function createStylesFN() {
-  transform(rules);
-  const generatedCSS = markup(transformedRules);
+let lastRules;
+
+function create(rulesToTransfrom) {
+  if (rulesToTransfrom === lastRules) {
+    return false;
+  }
+
+  transform(rulesToTransfrom);
+  const generatedCSS = createMarkup(transformedRules);
+  injectStyle(generatedCSS);
+  lastRules = rulesToTransfrom;
 }
 
-export const createStyles = createStylesFN;
-export const createClass = createClassFN;
+const createStylesFN = () => create(rules);
+
+export const createStyles = memoize(createStylesFN);
+export const createClass = memoize(createClassFN);
 export const shallowStyles = generate;
 export function clearStyles() {
   rules = [];

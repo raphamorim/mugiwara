@@ -10,10 +10,10 @@ Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.co
 #### Benchmark
 
 ```bash
-cxs x 30,508 ops/sec ±7.83% (82 runs sampled)
-fela x 29,634 ops/sec ±1.08% (86 runs sampled)
-mugiwara x 33,439 ops/sec ±0.73% (87 runs sampled)
-glamor x 24,752 ops/sec ±1.08% (86 runs sampled)
+cxs x 31,955 ops/sec ±5.10% (85 runs sampled)
+fela x 29,790 ops/sec ±0.93% (85 runs sampled)
+mugiwara x 33,806 ops/sec ±0.96% (86 runs sampled)
+glamor x 25,009 ops/sec ±1.34% (85 runs sampled)
 Fastest is mugiwara
 ✨  Done in 27.38s.
 ```
