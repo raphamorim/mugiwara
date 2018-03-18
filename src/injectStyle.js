@@ -1,4 +1,4 @@
-const injectStyle = (style) => {
+const injectStyle = style => {
   const styleElement = document.createElement('style');
   let styleSheet = null;
 
@@ -6,6 +6,6 @@ const injectStyle = (style) => {
 
   styleSheet = styleElement.sheet;
   styleSheet.insertRule(style, styleSheet.cssRules.length);
-}
+};
 
 export default injectStyle;
