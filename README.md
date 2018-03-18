@@ -5,6 +5,8 @@
 
 Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as [Chain CSS](#how-chain-css-works).
 
+**Status**: Under development. Don't use it in Production.
+
 #### Principles:
 
 - Transform declarations in Shallow way
@@ -92,24 +94,23 @@ Example with ReactJS Server side-render:
 ```jsx
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { shallowStyles, clearStyles } from 'mugiwara'
+import { shallowStyles } from 'mugiwara'
 import App from './App'
 
-const html = ReactDOMServer.renderToString(<App />)
-
-const doc = `
-  <html>
-    <style>${shallowStyles()}</style>
-    ${html}
-  </html>
+const renderedApp = ReactDOMServer.renderToString(<App />)
+const staticPage = `
+<html>
+  <style>${shallowStyles()}</style>
+  ${renderedApp}
+</html>
 `
 
-// clear cached styles
-clearStyles()
-
-console.log(doc)
+console.log(staticPage)
 /*
-
+<html>
+  <style>.app{position:absolute;display:flex;margin:0 auto;}.heading{font-family:Helvetica, arial;}</style>
+  <div class="app" data-reactroot=""><div class="heading">MyApp</div></div>
+</html>
 */
 ```
 
