@@ -1,10 +1,9 @@
 const h = require('react').createElement
 const { render } = require('react-dom')
-
 const app = document.createElement('div')
 
 module.exports = () => {
-  const Button = styled('button')(props => ({
+  const ButtonStyle = {
     fontFamily: 'inherit',
     fontSize: 'inherit',
     display: 'inline-block',
@@ -13,21 +12,11 @@ module.exports = () => {
     border: 0,
     borderRadius: 4,
     color: 'white',
-    backgroundColor: props.color,
     appearance: 'none',
-    ':hover': {
-      backgroundColor: 'black'
-    }
-  }))
+  }
 
   const button = render(
-    h(Button, { color: 'tomato' }, 'Hello'),
+    h('button', { style: ButtonStyle }, 'Hello'),
     app
   )
 }
-
-const styled = C => (...args) => props => h(C, Object.assign({}, props, {
-  style: Object.assign({}, props.style,
-    ...args.map(a => typeof a === 'function' ? a(props) : a)
-  )
-}))

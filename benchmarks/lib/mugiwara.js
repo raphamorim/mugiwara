@@ -1,6 +1,6 @@
 const h = require('react').createElement
 const { render } = require('react-dom')
-const { createClass, shallowStyles } = require('../../dist/mugiwara.umd.js')
+const { createClass, createStyles } = require('../../dist/mugiwara.umd.js')
 
 const app = document.createElement('div')
 
@@ -21,6 +21,4 @@ module.exports = () => {
     h('button', { className: ButtonClassName }, 'Hello'),
     app
   )
-
-  // shallowStyles()
 }

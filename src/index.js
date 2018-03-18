@@ -71,9 +71,8 @@ function transformRules(_rules) {
   }
 }
 
-function createClassFN(styleOrClassName, style) {
-  let className;
-  let styleRules;
+function checkParams(styleOrClassName, style) {
+  let className, styleKeys, styleRules;
 
   if (typeof styleOrClassName === 'object') {
     className =
@@ -81,22 +80,40 @@ function createClassFN(styleOrClassName, style) {
       Math.random()
         .toString(36)
         .substring(7);
-    styleRules = Object.keys(styleOrClassName);
+    styleKeys = Object.keys(styleOrClassName);
+    styleRules = styleOrClassName;
   } else if (
     typeof styleOrClassName === 'string' &&
     typeof style === 'object'
   ) {
     className = '.' + styleOrClassName;
-    styleRules = Object.keys(style);
-    styleOrClassName = style;
-  } else {
+    styleKeys = Object.keys(style);
+    styleRules = style;
+  }
+
+  return {
+    className,
+    styleRules,
+    styleKeys,
+  };
+}
+
+const checkParamsMemo = memoize(checkParams);
+
+function createClassFN(styleOrClassName, style) {
+  const {className, styleKeys, styleRules} = checkParamsMemo(
+    styleOrClassName,
+    style
+  );
+
+  if (!className) {
     return false;
   }
 
-  styleRules.forEach(property => {
+  styleKeys.forEach(property => {
     rules.push({
       property: hyphenate(property),
-      value: styleOrClassName[property],
+      value: styleRules[property],
       className: className,
     });
   });
@@ -116,10 +133,10 @@ function createStylesFN() {
   transform(rules);
   const generatedCSS = markup(transformedRules);
 
-  injectStyle(markup(generatedCSS));
+  injectStyle(generatedCSS);
 }
 
-export const createStyles = createStylesFN;
+export const createStyles = memoize(createStylesFN);
 export const createClass = createClassFN;
 export const shallowStyles = generate;
 export function clearStyles() {

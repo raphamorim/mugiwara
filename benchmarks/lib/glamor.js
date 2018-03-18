@@ -1,5 +1,5 @@
 const h = require('react').createElement
-const ReactDOMServer = require('react-dom/server')
+const { render } = require('react-dom')
 const glamor = require('glamor')
 
 const app = document.createElement('div')
@@ -17,7 +17,7 @@ module.exports = () => {
     appearance: 'none',
   })
 
-  const button = ReactDOMServer.renderToString(
+  const button = render(
     h('button', { className: ButtonClass }, 'Hello'),
     app
   )

@@ -7,6 +7,16 @@ Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.co
 
 **Status**: Under development. Don't use it in Production.
 
+#### Benchmark
+
+```bash
+mugiwara x 31,170 ops/sec ±7.40% (78 runs sampled)
+glamor x 23,974 ops/sec ±3.43% (78 runs sampled)
+styled-components x 314 ops/sec ±4.15% (61 runs sampled)
+Fastest is mugiwara
+✨  Done in 20.72s.
+```
+
 #### Principles:
 
 - Transform declarations in Shallow way
@@ -61,7 +71,7 @@ Example with ReactJS:
 ```jsx
 import React from 'react'
 import { render } from 'react-dom'
-import { createClass, shallowStyles } from 'mugiwara'
+import { createClass, createStyles } from 'mugiwara'
 
 const className = createClass({
   padding: 32,
@@ -70,7 +80,7 @@ const className = createClass({
 
 const Box = (props) => <div {...props} className={className} />
 
-shallowStyles()
+createStyles()
 
 render(Box, document.querySelector('#root'))
 ```

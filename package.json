@@ -45,6 +45,8 @@
     "fast-memoize": "^2.3.2",
     "glob": "^7.1.2",
     "jest": "^22.4.2",
+    "mem": "^3.0.0",
+    "memoizee": "^0.4.12",
     "minimatch": "^3.0.4",
     "prettier": "^1.5.3",
     "react": "^16.2.0",
