@@ -1,13 +1,12 @@
 {
   "name": "mugiwara",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "blazing fast minimal css-in-js solution",
   "main": "dist/mugiwara.umd.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "postinstall": "yarn build",
     "lint": "node ./scripts/eslint/index.js",
     "linc": "node ./scripts/eslint/only-changed.js",
     "build": "node scripts/rollup/build.js",
