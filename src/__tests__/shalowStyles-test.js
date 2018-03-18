@@ -62,30 +62,4 @@ describe('shallowStyles', () => {
       '.header,.my-other-wrapper{color:#333;}.header{background:#F9F9F9;font-size:20px;}.wrapper{color:#f8f8f8;background:blue;border-rigth:1px solid #333;}.my-other-wrapper{font-size:15px;position:absolute;}'
     );
   });
-
-  it('should shallowStyles remove redundances', () => {
-    createClass('header', {
-      color: '#333',
-      background: '#F9F9F9',
-      fontSize: '20px',
-    });
-
-    createClass('wrapper', {
-      color: '#f8f8f8',
-      background: 'blue',
-      borderRigth: '1px solid #333',
-    });
-
-    createClass('my-other-wrapper', {
-      color: '#333',
-      fontSize: '15px',
-      position: 'absolute',
-    });
-
-    const styles = shallowStyles();
-
-    expect(styles).toEqual(
-      '.header,.my-other-wrapper{color:#333;}.header{background:#F9F9F9;font-size:20px;}.wrapper{color:#f8f8f8;background:blue;border-rigth:1px solid #333;}.my-other-wrapper{font-size:15px;position:absolute;}'
-    );
-  });
 });

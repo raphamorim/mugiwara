@@ -21,4 +21,6 @@ module.exports = () => {
     h('button', { className: ButtonClassName }, 'Hello'),
     app
   )
+
+  createStyles()
 }

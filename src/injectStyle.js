@@ -1,10 +1,10 @@
 const injectStyle = style => {
   const styleElement = document.createElement('style');
-  let styleSheet = null;
+  let styleSheet = document.createTextNode('');
 
   document.head.appendChild(styleElement);
 
-  styleSheet = styleElement.sheet;
+  sheetSheet = styleElement.sheet;
   styleSheet.insertRule(style, styleSheet.cssRules.length);
 };
 

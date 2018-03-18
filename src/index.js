@@ -1,28 +1,20 @@
 import memoize from 'fast-memoize';
 import injectStyle from './injectStyle';
+import hyphenate from './hyphenateStyleName';
 
 let rules = [];
 let transformedRules = {};
+let hasStyleChanged = true;
 
-const hyphenate = memoize(hyphenateStyleName);
 const markup = memoize(createMarkup);
 const transform = memoize(transformRules);
 
-function hyphenateStyleName(string) {
-  const uppercasePattern = /[A-Z]/g;
-  const msPattern = /^ms-/;
-
-  return string
-    .replace(uppercasePattern, '-$&')
-    .toLowerCase()
-    .replace(msPattern, '-ms-');
-}
-
 function createMarkup(obj) {
   const keys = Object.keys(obj);
-  if (!keys.length) return '';
-  let i,
-    len = keys.length;
+  if (!keys.length)
+    return '';
+
+  let i, len = keys.length;
   let result = '';
 
   for (i = 0; i < len; i++) {
@@ -124,19 +116,15 @@ function createClassFN(styleOrClassName, style) {
 function generate() {
   transform(rules);
   const generatedCSS = markup(transformedRules);
-
-  injectStyle(generatedCSS);
   return generatedCSS;
 }
 
 function createStylesFN() {
   transform(rules);
   const generatedCSS = markup(transformedRules);
-
-  injectStyle(generatedCSS);
 }
 
-export const createStyles = memoize(createStylesFN);
+export const createStyles = createStylesFN;
 export const createClass = createClassFN;
 export const shallowStyles = generate;
 export function clearStyles() {

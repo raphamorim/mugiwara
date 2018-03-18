@@ -1,14 +1,13 @@
 const h = require('react').createElement
 const { render } = require('react-dom')
 const { createRenderer } = require('fela')
-const { createComponent, Provider } = require('react-fela')
 
 const app = document.createElement('div')
 
-const renderer = createRenderer()
-
 module.exports = () => {
-  const Button = createComponent(props => ({
+  const renderer = createRenderer()
+
+  const rule = state => ({
     fontFamily: 'inherit',
     fontSize: 'inherit',
     display: 'inline-block',
@@ -17,17 +16,15 @@ module.exports = () => {
     border: 0,
     borderRadius: 4,
     color: 'white',
-    backgroundColor: props.color,
     appearance: 'none',
-    ':hover': {
-      backgroundColor: 'black'
-    }
-  }), 'button')
+  })
+
+  const className = renderer.renderRule(rule, {
+    primary: true
+  })
 
   const button = render(
-    h(Provider, { renderer },
-      h(Button, { color: 'tomato' }, 'Hello')
-    ),
+    h('button', { className: className }, 'Hello'),
     app
   )
 }
