@@ -5,6 +5,8 @@
 
 Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.com/blog/virtual-css-with-styletron) however using a preemption algorithm behind, called as [Chain CSS](#how-chain-css-works).
 
+[![CircleCI branch](https://img.shields.io/circleci/project/github/raphamorim/mugiwara/master.svg?style=for-the-badge)](https://circleci.com/gh/raphamorim/mugiwara) [![NPM Version](https://img.shields.io/npm/v/mugiwara.svg?style=for-the-badge)](https://npmjs.com/package/mugiwara)
+
 **Status**: Under development. Don't use it in Production.
 
 #### Benchmark
