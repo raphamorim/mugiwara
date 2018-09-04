@@ -7,7 +7,7 @@ Mugiwara uses similar [Virtual CSS concept to reduce bundle](https://ryantsao.co
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/raphamorim/mugiwara/master.svg?style=for-the-badge)](https://circleci.com/gh/raphamorim/mugiwara) [![NPM Version](https://img.shields.io/npm/v/mugiwara.svg?style=for-the-badge)](https://npmjs.com/package/mugiwara)
 
-**Status**: Under development. Don't use it in Production.
+**Status**: Under development.
 
 #### Benchmark
 
